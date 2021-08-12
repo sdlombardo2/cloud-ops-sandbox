@@ -27,7 +27,8 @@ products = [
     '9SIQT8TOJO',
     'L9ECAV7KIM',
     'LS4PSXUNUM',
-    'OLJCESPC7Z']
+    'OLJCESPC7Z'
+]
 
 currencies = [
     'EUR',
@@ -35,7 +36,8 @@ currencies = [
     'JPY',
     'GBP',
     'TRY',
-    'CAD']
+    'CAD'
+]
 
 # Define specific frontend actions.
 
