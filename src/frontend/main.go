@@ -160,7 +160,7 @@ func main() {
                 Propagation: &b3.HTTPFormat{}}
 
         log.Infof("starting server on " + addr + ":" + srvPort)
-        log.Fatal(http.ListenAndServe(addr+":"+srvPort, hnynethttp.WrapHandler(handler)))
+        log.Fatal(http.ListenAndServe(addr+":"+srvPort, hnynethttp.WrapHandler(r)))
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
