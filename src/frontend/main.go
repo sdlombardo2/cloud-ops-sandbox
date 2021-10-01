@@ -35,6 +35,7 @@ import (
         "google.golang.org/grpc"
         beeline "github.com/honeycombio/beeline-go"
         "github.com/honeycombio/beeline-go/wrappers/hnynethttp"
+        "github.com/honeycombio/beeline-go/wrappers/hnygorilla"
 )
 
 const (
