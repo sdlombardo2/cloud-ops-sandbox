@@ -86,8 +86,9 @@ func main() {
         beeline.Init(beeline.Config{
           // Get this via https://ui.honeycomb.io/account after signing up for Honeycomb
           WriteKey: "f9e0f7c58be2dde4c878162daed00123",
+                ServiceName: "frontend",
           // The name of your app is a good choice to start with
-          Dataset: "Online_Boutique-Frontend",
+          Dataset: "Online_Boutique",
         })
         defer beeline.Close()
         ctx := context.Background()
