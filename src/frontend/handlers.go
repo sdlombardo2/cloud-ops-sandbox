@@ -28,7 +28,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
-	beeline "github.com/honeycombio/beeline-go"
+	//beeline "github.com/honeycombio/beeline-go"
 	//"github.com/honeycombio/beeline-go/wrappers/hnygorilla"
 	//"github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 	"github.com/sirupsen/logrus"
@@ -61,21 +61,21 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve currencies"), http.StatusInternalServerError)
 		return
 	}
-	beeline.AddField(r.Context(), "currencies", currencies)
+	//beeline.AddField(r.Context(), "currencies", currencies)
 	
 	products, err := fe.getProducts(r.Context())
 	if err != nil {
 		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve products"), http.StatusInternalServerError)
 		return
 	}
-	beeline.AddField(r.Context(), "products", products)
+	//beeline.AddField(r.Context(), "products", products)
 	
 	cart, err := fe.getCart(r.Context(), sessionID(r))
 	if err != nil {
 		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve cart"), http.StatusInternalServerError)
 		return
 	}
-	beeline.AddField(r.Context(), "cart", cart)
+	//beeline.AddField(r.Context(), "cart", cart)
 
 	type productView struct {
 		Item  *pb.Product
@@ -104,7 +104,7 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 		log.Debugf("Detected Google metadata server: %v, setting ENV_PLATFORM to GCP.", addrs)
 		env = "gcp"
 	}
-	beeline.AddField(r.Context(), "addrs", addrs)
+	//beeline.AddField(r.Context(), "addrs", addrs)
 
 	log.Debugf("ENV_PLATFORM is: %s", env)
 	plat = platformDetails{}
