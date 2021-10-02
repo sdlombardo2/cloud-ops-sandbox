@@ -29,8 +29,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 	beeline "github.com/honeycombio/beeline-go"
-	"github.com/honeycombio/beeline-go/wrappers/hnygorilla"
-	"github.com/honeycombio/beeline-go/wrappers/hnynethttp"
+	//"github.com/honeycombio/beeline-go/wrappers/hnygorilla"
+	//"github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 	"github.com/sirupsen/logrus"
 
 	pb "github.com/GoogleCloudPlatform/microservices-demo/src/frontend/genproto"
