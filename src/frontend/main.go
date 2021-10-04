@@ -153,12 +153,12 @@ func main() {
         r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
         r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 
-        //var handler http.Handler = r
-        //handler = &logHandler{log: log, next: handler} // add logging
-        //handler = ensureSessionID(handler)             // add session ID
-        //handler = &ochttp.Handler{                     // add opencensus instrumentation
-        //        Handler:     handler,
-        //        Propagation: &b3.HTTPFormat{}}
+        var handler http.Handler = r
+        handler = &logHandler{log: log, next: handler} // add logging
+        handler = ensureSessionID(handler)             // add session ID
+        handler = &ochttp.Handler{                     // add opencensus instrumentation
+                Handler:     handler,
+                Propagation: &b3.HTTPFormat{}}
 
         log.Infof("starting server on " + addr + ":" + srvPort)
         log.Fatal(http.ListenAndServe(addr+":"+srvPort, hnynethttp.WrapHandler(r)))
