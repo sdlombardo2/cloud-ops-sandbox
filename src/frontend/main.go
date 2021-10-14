@@ -34,7 +34,7 @@ import (
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
         beeline "github.com/honeycombio/beeline-go"
-        "github.com/honeycombio/beeline-go/wrappers/hnynethttp"
+        //"github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 )
 
 const (
@@ -161,7 +161,7 @@ func main() {
                 Propagation: &b3.HTTPFormat{}}
 
         log.Infof("starting server on " + addr + ":" + srvPort)
-        log.Fatal(http.ListenAndServe(addr+":"+srvPort, hnynethttp.WrapHandler(r)))
+        log.Fatal(http.ListenAndServe(addr+":"+srvPort, handler))
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
