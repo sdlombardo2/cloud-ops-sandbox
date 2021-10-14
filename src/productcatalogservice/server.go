@@ -43,6 +43,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	beeline "github.com/honeycombio/beeline-go"
+        "github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 )
 
 var (
@@ -75,6 +77,14 @@ func init() {
 }
 
 func main() {
+	beeline.Init(beeline.Config{
+          // Get this via https://ui.honeycomb.io/account after signing up for Honeycomb
+          WriteKey: "f9e0f7c58be2dde4c878162daed00123",
+          // The name of your app is a good choice to start with
+          Dataset: "Online_Boutique-Frontend",
+          ServiceName: "productcatalogservice",
+        })
+        defer beeline.Close()
 	if os.Getenv("DISABLE_TRACING") == "" {
 		log.Info("Tracing enabled.")
 		go initTracing()
