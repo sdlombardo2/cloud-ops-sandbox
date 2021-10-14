@@ -44,7 +44,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	beeline "github.com/honeycombio/beeline-go"
-        "github.com/honeycombio/beeline-go/wrappers/hnynethttp"
+        //"github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 )
 
 var (
