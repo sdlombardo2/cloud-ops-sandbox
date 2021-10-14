@@ -19,4 +19,6 @@ require (
 	google.golang.org/appengine v1.6.1 // indirect
 	google.golang.org/genproto v0.0.0-20190708153700-3bdd9d9f5532 // indirect
 	google.golang.org/grpc v1.22.0
+	github.com/honeycombio/beeline-go v0.4.11
+        github.com/honeycombio/libhoney-go v1.15.4 // indirect
 )
