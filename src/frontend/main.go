@@ -87,7 +87,7 @@ func main() {
           // Get this via https://ui.honeycomb.io/account after signing up for Honeycomb
           WriteKey: "f9e0f7c58be2dde4c878162daed00123",
           // The name of your app is a good choice to start with
-          Dataset: "Online_Boutique",
+          Dataset: "Online_Boutique-Frontend",
           ServiceName: "frontend",
         })
         defer beeline.Close()
