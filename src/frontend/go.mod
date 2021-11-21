@@ -19,8 +19,6 @@ require (
         github.com/google/pprof v0.0.0-20190515194954-54271f7e092f // indirect
         github.com/google/uuid v1.3.0
         github.com/gorilla/mux v1.8.0
-        github.com/honeycombio/beeline-go v0.4.11
-        github.com/honeycombio/libhoney-go v1.15.4 // indirect
         github.com/jmoiron/sqlx v1.3.4 // indirect
         github.com/json-iterator/go v1.1.10 // indirect
         github.com/julienschmidt/httprouter v1.3.0 // indirect
