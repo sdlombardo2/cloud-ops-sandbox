@@ -33,8 +33,6 @@ import (
         "go.opencensus.io/stats/view"
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
-        beeline "github.com/honeycombio/beeline-go"
-        "github.com/honeycombio/beeline-go/wrappers/hnynethttp"
 )
 
 const (
@@ -83,14 +81,6 @@ type frontendServer struct {
 }
 
 func main() {
-        beeline.Init(beeline.Config{
-          // Get this via https://ui.honeycomb.io/account after signing up for Honeycomb
-          WriteKey: "f9e0f7c58be2dde4c878162daed00123",
-          // The name of your app is a good choice to start with
-          Dataset: "Online_Boutique-Frontend",
-          ServiceName: "frontend",
-        })
-        defer beeline.Close()
         ctx := context.Background()
         log := logrus.New()
         log.Level = logrus.DebugLevel
@@ -161,7 +151,7 @@ func main() {
                 Propagation: &b3.HTTPFormat{}}
 
         log.Infof("starting server on " + addr + ":" + srvPort)
-        log.Fatal(http.ListenAndServe(addr+":"+srvPort, hnynethttp.WrapHandler(handler)))
+        log.Fatal(http.ListenAndServe(addr+":"+srvPort, handler))
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
