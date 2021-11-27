@@ -92,7 +92,6 @@ func main() {
             profiler.WithProfileTypes(
                 profiler.CPUProfile,
                 profiler.HeapProfile,
-                profiler.Config,
 
                 // The profiles below are disabled by
                 // default to keep overhead low, but
@@ -100,6 +99,9 @@ func main() {
                 // profiler.BlockProfile,
                 // profiler.MutexProfile,
                 // profiler.GoroutineProfile,
+            ),
+            profiler.WithService(
+                profiler.Config,
             ),
         ); err != nil {
             log.Fatal(err)
