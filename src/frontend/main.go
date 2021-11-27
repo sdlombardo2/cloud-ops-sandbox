@@ -24,7 +24,7 @@ import (
         //"cloud.google.com/go/profiler"
         "contrib.go.opencensus.io/exporter/jaeger"
         "contrib.go.opencensus.io/exporter/stackdriver"
-        "github.com/gorilla/mux"
+        //"github.com/gorilla/mux"
         "github.com/pkg/errors"
         "github.com/sirupsen/logrus"
         "go.opencensus.io/plugin/ocgrpc"
