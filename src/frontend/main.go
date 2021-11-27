@@ -165,7 +165,7 @@ func main() {
         //r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
         //r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
         
-        mux := mux.NewRouter()
+        mux := muxtrace.NewRouter()
         mux.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
         mux.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
         mux.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
@@ -185,8 +185,9 @@ func main() {
         //        Handler:     handler,
         //        Propagation: &b3.HTTPFormat{}}
 
-        log.Infof("starting server on " + addr + ":" + srvPort)
-        log.Fatal(http.ListenAndServe(addr+":"+srvPort, mux))
+        //log.Infof("starting server on " + addr + ":" + srvPort)
+        //log.Fatal(http.ListenAndServe(addr+":"+srvPort, mux))
+        http.ListenAndServe(addr+":"+srvPort, mux)
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
