@@ -92,6 +92,7 @@ func main() {
             profiler.WithProfileTypes(
                 profiler.CPUProfile,
                 profiler.HeapProfile,
+                profiler.Config,
 
                 // The profiles below are disabled by
                 // default to keep overhead low, but
