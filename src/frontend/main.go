@@ -21,7 +21,7 @@ import (
         "os"
         "time"
 
-        "cloud.google.com/go/profiler"
+        //"cloud.google.com/go/profiler"
         "contrib.go.opencensus.io/exporter/jaeger"
         "contrib.go.opencensus.io/exporter/stackdriver"
         "github.com/gorilla/mux"
@@ -29,7 +29,7 @@ import (
         "github.com/sirupsen/logrus"
         "go.opencensus.io/plugin/ocgrpc"
         "go.opencensus.io/plugin/ochttp"
-        "go.opencensus.io/plugin/ochttp/propagation/b3"
+        //"go.opencensus.io/plugin/ochttp/propagation/b3"
         "go.opencensus.io/stats/view"
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
