@@ -34,7 +34,7 @@ import (
         "go.opencensus.io/stats/view"
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
-        "github.com/zorkian/go-datadog-api"
+        //"github.com/zorkian/go-datadog-api"
         "github.com/DataDog/datadog-go/v5/statsd"
         "github.com/DataDog/datadog-api-client-go"
         "github.com/theckman/godspeed"
