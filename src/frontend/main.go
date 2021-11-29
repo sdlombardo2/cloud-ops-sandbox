@@ -90,6 +90,10 @@ func main() {
         if err != nil {
             log.Fatal(err)
         }
+        for {
+	    dogstatsd_client.SimpleEvent("An error occurred", "Error message")
+	    time.Sleep(10 * time.Second)
+	}
         tracer.Start()
         defer tracer.Stop()
 
