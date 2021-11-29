@@ -35,7 +35,7 @@ import (
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
         "github.com/zorkian/go-datadog-api"
-        "github.com/DataDog/datadog-go"
+        "github.com/DataDog/datadog-go/v5/statsd"
         "github.com/DataDog/datadog-api-client-go"
         "github.com/theckman/godspeed"
         "github.com/rs/xstats"
@@ -91,6 +91,10 @@ type frontendServer struct {
 }
 
 func main() {
+        statsd, err := statsd.New("127.0.0.1:8125")
+        if err != nil {
+            log.Fatal(err)
+        }
         tracer.Start()
         defer tracer.Stop()
 
