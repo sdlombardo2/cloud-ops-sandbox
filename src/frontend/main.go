@@ -35,7 +35,6 @@ import (
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
         "github.com/DataDog/datadog-go/v5/statsd"
-        "github.com/DataDog/datadog-api-client-go"
         muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
         "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
         "gopkg.in/DataDog/dd-trace-go.v1/profiler"
