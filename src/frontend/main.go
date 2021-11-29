@@ -34,7 +34,7 @@ import (
         "go.opencensus.io/stats/view"
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
-        "github.com/DataDog/datadog-go/v5/statsd"
+        //"github.com/DataDog/datadog-go/v5/statsd"
         muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
         "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
         "gopkg.in/DataDog/dd-trace-go.v1/profiler"
@@ -86,14 +86,7 @@ type frontendServer struct {
 }
 
 func main() {
-        dogstatsd_client, err := statsd.New("127.0.0.1:8125")
-        if err != nil {
-            log.Fatal(err)
-        }
-        for {
-	    dogstatsd_client.SimpleEvent("An error occurred", "Error message")
-	    time.Sleep(10 * time.Second)
-	}
+        
         tracer.Start()
         defer tracer.Stop()
 
@@ -113,6 +106,7 @@ func main() {
             log.Fatal(err)
         }
         defer profiler.Stop()
+	
         ctx := context.Background()
         log := logrus.New()
         log.Level = logrus.DebugLevel
