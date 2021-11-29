@@ -86,7 +86,7 @@ type frontendServer struct {
 }
 
 func main() {
-        statsd, err := statsd.New("127.0.0.1:8125")
+        dogstatsd_client, err := statsd.New("127.0.0.1:8125")
         if err != nil {
             log.Fatal(err)
         }
