@@ -86,7 +86,19 @@ type frontendServer struct {
 }
 
 func main() {
-        
+        ctx := context.Background()
+        log := logrus.New()
+        log.Level = logrus.DebugLevel
+        log.Formatter = &logrus.JSONFormatter{
+                FieldMap: logrus.FieldMap{
+                        logrus.FieldKeyTime:  "timestamp",
+                        logrus.FieldKeyLevel: "severity",
+                        logrus.FieldKeyMsg:   "message",
+                },
+                TimestampFormat: time.RFC3339Nano,
+        }
+        log.Out = os.Stdout
+	
         tracer.Start()
         defer tracer.Stop()
 
@@ -106,19 +118,6 @@ func main() {
             log.Fatal(err)
         }
         defer profiler.Stop()
-	
-        ctx := context.Background()
-        log := logrus.New()
-        log.Level = logrus.DebugLevel
-        log.Formatter = &logrus.JSONFormatter{
-                FieldMap: logrus.FieldMap{
-                        logrus.FieldKeyTime:  "timestamp",
-                        logrus.FieldKeyLevel: "severity",
-                        logrus.FieldKeyMsg:   "message",
-                },
-                TimestampFormat: time.RFC3339Nano,
-        }
-        log.Out = os.Stdout
 
         //if os.Getenv("DISABLE_TRACING") == "" {
         //        log.Info("Tracing enabled.")
