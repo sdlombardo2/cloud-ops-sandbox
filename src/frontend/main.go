@@ -114,10 +114,9 @@ func main() {
                 // profiler.MutexProfile,
                 // profiler.GoroutineProfile,
             ),
-	if err != nil {
+	); err != nil {
             log.Fatal(err)
         }
-        ); 
 	
         defer profiler.Stop()
 
