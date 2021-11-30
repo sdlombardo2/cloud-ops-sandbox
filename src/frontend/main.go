@@ -120,12 +120,12 @@ func main() {
         }
         log.Out = os.Stdout
 
-        if os.Getenv("DISABLE_TRACING") == "" {
-                log.Info("Tracing enabled.")
-                go initTracing(log)
-        } else {
-                log.Info("Tracing disabled.")
-        }
+        //if os.Getenv("DISABLE_TRACING") == "" {
+        //        log.Info("Tracing enabled.")
+        //        go initTracing(log)
+        //} else {
+        //        log.Info("Tracing disabled.")
+        //}
 
         srvPort := port
         if os.Getenv("PORT") != "" {
