@@ -19,7 +19,7 @@ import (
         "fmt"
         "net/http"
         "os"
-        "log"
+        //"log"
         "time"
 
         //"cloud.google.com/go/profiler"
