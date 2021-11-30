@@ -85,7 +85,7 @@ type frontendServer struct {
         adSvcConn *grpc.ClientConn
 }
 
-func main(log logrus.FieldLogger) {
+func main() {
         ctx := context.Background()
         log := logrus.New()
         log.Level = logrus.DebugLevel
@@ -114,7 +114,8 @@ func main(log logrus.FieldLogger) {
                 // profiler.MutexProfile,
                 // profiler.GoroutineProfile,
             ),
-        ); err != nil {
+        ); 
+	if err != nil {
             log.Fatal(err)
         }
         defer profiler.Stop()
