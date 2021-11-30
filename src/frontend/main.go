@@ -85,7 +85,7 @@ type frontendServer struct {
         adSvcConn *grpc.ClientConn
 }
 
-func main() {
+func main(log logrus.FieldLogger) {
         ctx := context.Background()
         log := logrus.New()
         log.Level = logrus.DebugLevel
