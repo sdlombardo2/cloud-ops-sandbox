@@ -114,10 +114,11 @@ func main() {
                 // profiler.MutexProfile,
                 // profiler.GoroutineProfile,
             ),
-        ); 
 	if err != nil {
             log.Fatal(err)
         }
+        ); 
+	
         defer profiler.Stop()
 
         //if os.Getenv("DISABLE_TRACING") == "" {
