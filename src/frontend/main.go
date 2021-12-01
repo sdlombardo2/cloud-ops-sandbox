@@ -35,9 +35,9 @@ import (
         "go.opencensus.io/trace"
         "google.golang.org/grpc"
         //"github.com/DataDog/datadog-go/v5/statsd"
-        muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
-        "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-        "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+        //muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
+        //"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+        //"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 )
 
 const (
@@ -99,34 +99,12 @@ func main() {
         }
         log.Out = os.Stdout
 	
-        tracer.Start()
-        defer tracer.Stop()
-
-        if err := profiler.Start(
-            profiler.WithProfileTypes(
-                profiler.CPUProfile,
-                profiler.HeapProfile,
-
-                // The profiles below are disabled by
-                // default to keep overhead low, but
-                // can be enabled as needed.
-                // profiler.BlockProfile,
-                // profiler.MutexProfile,
-                // profiler.GoroutineProfile,
-            ),
-	); 
-	//err != nil {
-        //    log.Fatal(err)
-        //}
-	
-        defer profiler.Stop()
-
-        //if os.Getenv("DISABLE_TRACING") == "" {
-        //        log.Info("Tracing enabled.")
-        //        go initTracing(log)
-        //} else {
-        //        log.Info("Tracing disabled.")
-        //}
+        if os.Getenv("DISABLE_TRACING") == "" {
+                log.Info("Tracing enabled.")
+                go initTracing(log)
+        } else {
+                log.Info("Tracing disabled.")
+        }
 
         srvPort := port
         if os.Getenv("PORT") != "" {
@@ -150,42 +128,42 @@ func main() {
         mustConnGRPC(ctx, &svc.checkoutSvcConn, svc.checkoutSvcAddr)
         mustConnGRPC(ctx, &svc.adSvcConn, svc.adSvcAddr)
 
-        //r := mux.NewRouter()
-        //r.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
-        //r.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
-        //r.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
-        //r.HandleFunc("/cart", svc.addToCartHandler).Methods(http.MethodPost)
-        //r.HandleFunc("/cart/empty", svc.emptyCartHandler).Methods(http.MethodPost)
-        //r.HandleFunc("/setCurrency", svc.setCurrencyHandler).Methods(http.MethodPost)
-        //r.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
-        //r.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
-        //r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
-        //r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
-        //r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
+        r := mux.NewRouter()
+        r.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
+        r.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
+        r.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
+        r.HandleFunc("/cart", svc.addToCartHandler).Methods(http.MethodPost)
+        r.HandleFunc("/cart/empty", svc.emptyCartHandler).Methods(http.MethodPost)
+        r.HandleFunc("/setCurrency", svc.setCurrencyHandler).Methods(http.MethodPost)
+        r.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
+        r.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
+        r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+        r.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
+        r.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
         
-        mux := muxtrace.NewRouter()
-        mux.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
-        mux.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
-        mux.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
-        mux.HandleFunc("/cart", svc.addToCartHandler).Methods(http.MethodPost)
-        mux.HandleFunc("/cart/empty", svc.emptyCartHandler).Methods(http.MethodPost)
-        mux.HandleFunc("/setCurrency", svc.setCurrencyHandler).Methods(http.MethodPost)
-        mux.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
-        mux.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
-        mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
-        mux.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
-        mux.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
+        //mux := muxtrace.NewRouter()
+        //mux.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
+        //mux.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
+        //mux.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
+        //mux.HandleFunc("/cart", svc.addToCartHandler).Methods(http.MethodPost)
+        //mux.HandleFunc("/cart/empty", svc.emptyCartHandler).Methods(http.MethodPost)
+        //mux.HandleFunc("/setCurrency", svc.setCurrencyHandler).Methods(http.MethodPost)
+        //mux.HandleFunc("/logout", svc.logoutHandler).Methods(http.MethodGet)
+        //mux.HandleFunc("/cart/checkout", svc.placeOrderHandler).Methods(http.MethodPost)
+        //mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+        //mux.HandleFunc("/robots.txt", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "User-agent: *\nDisallow: /") })
+        //mux.HandleFunc("/_healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 
-        //var handler http.Handler = r
-        //handler = &logHandler{log: log, next: handler} // add logging
-        //handler = ensureSessionID(handler)             // add session ID
-        //handler = &ochttp.Handler{                     // add opencensus instrumentation
-        //        Handler:     handler,
-        //        Propagation: &b3.HTTPFormat{}}
+        var handler http.Handler = r
+        handler = &logHandler{log: log, next: handler} // add logging
+        handler = ensureSessionID(handler)             // add session ID
+        handler = &ochttp.Handler{                     // add opencensus instrumentation
+                Handler:     handler,
+                Propagation: &b3.HTTPFormat{}}
 
-        //log.Infof("starting server on " + addr + ":" + srvPort)
-        //log.Fatal(http.ListenAndServe(addr+":"+srvPort, mux))
-        http.ListenAndServe(addr+":"+srvPort, mux)
+        log.Infof("starting server on " + addr + ":" + srvPort)
+        log.Fatal(http.ListenAndServe(addr+":"+srvPort, mux))
+        //http.ListenAndServe(addr+":"+srvPort, mux)
 }
 
 func initJaegerTracing(log logrus.FieldLogger) {
