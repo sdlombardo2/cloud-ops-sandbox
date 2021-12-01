@@ -105,6 +105,13 @@ func main() {
         } else {
                 log.Info("Tracing disabled.")
         }
+	
+	if os.Getenv("DISABLE_PROFILER") == "" {
+		log.Info("Profiling enabled.")
+		go initProfiling(log, "frontend", "1.0.0")
+	} else {
+		log.Info("Profiling disabled.")
+	}
 
         srvPort := port
         if os.Getenv("PORT") != "" {
